@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Republic Day | Bharat 2026</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Teko:wght@300;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. CORE VARIABLES --- */
+        :root {
+            --orange: #FF9933;
+            --white: #ffffff;
+            --green: #138808;
+            --blue: #000080;
+            --dark-bg: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- 2. CUSTOM CURSOR --- */
+        .cursor {
+            position: fixed; width: 20px; height: 20px;
+            border: 2px solid var(--white); border-radius: 50%;
+            pointer-events: none; z-index: 9999;
+            transition: transform 0.1s; mix-blend-mode: difference;
+        }
+        .cursor-trail {
+            position: fixed; width: 8px; height: 8px; border-radius: 50%;
+            pointer-events: none; z-index: 9998;
+        }
+
+        /* --- 3. BACKGROUND PARTICLES (NEW) --- */
+        .particles-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none;
+        }
+        .particle {
+            position: absolute; border-radius: 50%; opacity: 0.6;
+            animation: floatUp 10s linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        /* --- 4. HERO SECTION --- */
+        section {
+            min-height: 100vh; padding: 50px 20px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+        }
+
+        .hero-title {
+            font-family: 'Teko', sans-serif; font-size: 8vw;
+            line-height: 0.9; text-align: center; text-transform: uppercase;
+            background: linear-gradient(to right, var(--orange), var(--white), var(--green));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.2));
+            z-index: 2;
+        }
+
+        /* Rotating 3D Chakra */
+        .ashoka-3d {
+            width: 150px; height: 150px; margin: 40px 0;
+            border-radius: 50%; border: 4px solid var(--blue);
+            background: radial-gradient(circle, transparent 30%, rgba(0,0,128,0.2) 100%);
+            box-shadow: 0 0 50px var(--blue), inset 0 0 20px var(--blue);
+            animation: spin 8s linear infinite; position: relative;
+        }
+        .ashoka-3d::after {
+            content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+            background: repeating-conic-gradient(from 0deg, var(--blue) 0deg 2deg, transparent 2deg 15deg);
+            border-radius: 50%;
+        }
+
+        /* --- 5. TILT CARDS --- */
+        .cards-container {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;
+            perspective: 1000px;
+        }
+        .tilt-card {
+            width: 300px; height: 400px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px); border-radius: 20px;
+            padding: 30px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            transform-style: preserve-3d; transform: translateZ(0);
+        }
+        .tilt-card h3 { font-family: 'Teko'; font-size: 2rem; color: var(--orange); margin: 10px 0; transform: translateZ(20px); }
+        .tilt-card p { text-align: center; color: #aaa; transform: translateZ(20px); }
+        .card-icon { font-size: 3rem; color: var(--white); transform: translateZ(30px); }
+
+        /* --- 6. REALISTIC FLAG & POLE --- */
+        .flag-pole-area {
+            height: 450px; width: 300px; position: relative;
+            border-bottom: 5px solid #555; display: flex; justify-content: center;
+        }
+        .pole {
+            width: 12px; height: 100%;
+            background: linear-gradient(90deg, #999, #fff, #999);
+            position: absolute; bottom: 0;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        /* THE NEW BEAUTIFUL FLAG */
+        .flag {
+            width: 200px; height: 130px;
+            position: absolute; bottom: 20px; left: 51%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            transition: bottom 4s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+            
+            /* Realistic Cloth Gradient */
+            background: linear-gradient(180deg, 
+                var(--orange) 0%, var(--orange) 33%, 
+                var(--white) 33%, var(--white) 66%, 
+                var(--green) 66%, var(--green) 100%);
+            
+            /* Wave Animation */
+            animation: waveFlag 3s ease-in-out infinite alternate;
+            transform-origin: left;
+        }
+
+        /* Cloth Ripple Effect Overlay */
+        .flag::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.2) 20%, 
+                rgba(0,0,0,0.1) 40%, 
+                rgba(255,255,255,0) 60%, 
+                rgba(0,0,0,0.1) 80%);
+            background-size: 200% 100%;
+            animation: ripple 2s linear infinite;
+        }
+
+        .chakra-center {
+            width: 35px; height: 35px;
+            border: 2px solid var(--blue); border-radius: 50%;
+            position: relative; z-index: 5;
+            background: white;
+            animation: spin 5s linear infinite;
+        }
+        .chakra-center::after {
+            content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+            background: repeating-conic-gradient(from 0deg, var(--blue) 0deg 15deg, transparent 15deg 30deg);
+            border-radius: 50%;
+        }
+
+        @keyframes waveFlag {
+            0% { transform: skewY(0deg); border-radius: 0 5px 5px 0; }
+            50% { transform: skewY(-2deg) translateY(-2px); border-radius: 0 10px 10px 0; }
+            100% { transform: skewY(2deg) translateY(2px); border-radius: 0 5px 5px 0; }
+        }
+        @keyframes ripple { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .hoist-btn {
+            margin-top: 40px; padding: 15px 50px;
+            font-size: 1.5rem; font-family: 'Teko';
+            background: linear-gradient(45deg, var(--orange), var(--green));
+            border: none; color: white; border-radius: 50px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            transition: 0.3s; z-index: 10;
+        }
+        .hoist-btn:hover { transform: scale(1.1); box-shadow: 0 0 40px var(--orange); }
+
+        /* --- 7. COPYRIGHT FOOTER --- */
+        footer {
+            margin-top: 50px; padding: 20px;
+            width: 100%; text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border);
+        }
+        .copyright-text {
+            font-size: 1.1rem; color: #ccc; letter-spacing: 1px;
+        }
+        .social-link {
+            color: var(--orange); text-decoration: none;
+            font-weight: bold; position: relative;
+            transition: 0.3s; margin-left: 5px;
+        }
+        .social-link:hover {
+            color: var(--green); text-shadow: 0 0 10px var(--green);
+        }
+        .social-link i { margin-right: 5px; }
+
+    /* --- 1. CORE VARIABLES --- */
+    :root {
+        --orange: #FF9933;
+        --white: #ffffff;
+        --green: #138808;
+        --blue: #000080;
+        --dark-bg: #050505;
+        --glass: rgba(255, 255, 255, 0.05);
+        --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+    body {
+        background-color: var(--dark-bg);
+        color: var(--white);
+        font-family: 'Rajdhani', sans-serif;
+        overflow-x: hidden; /* Prevent horizontal scroll */
+        position: relative;
+        width: 100%;
+    }
+
+    /* --- 2. CUSTOM CURSOR --- */
+    /* Cursor Logic: Only show on devices with a mouse */
+    @media (pointer: fine) {
+        .cursor {
+            position: fixed; width: 20px; height: 20px;
+            border: 2px solid var(--white); border-radius: 50%;
+            pointer-events: none; z-index: 9999;
+            transition: transform 0.1s; mix-blend-mode: difference;
+        }
+        .cursor-trail {
+            position: fixed; width: 8px; height: 8px; border-radius: 50%;
+            pointer-events: none; z-index: 9998;
+        }
+    }
+
+    /* Hide cursor elements on touch devices to prevent glitches */
+    @media (pointer: coarse) {
+        .cursor, .cursor-trail { display: none !important; }
+        * { cursor: auto !important; }
+    }
+
+    /* --- 3. BACKGROUND PARTICLES --- */
+    .particles-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -1; pointer-events: none;
+    }
+    .particle {
+        position: absolute; border-radius: 50%; opacity: 0.6;
+        animation: floatUp 10s linear infinite;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0); opacity: 0; }
+        50% { opacity: 0.8; }
+        100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    /* --- 4. HERO SECTION --- */
+    section {
+        min-height: 100vh; padding: 50px 20px;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        width: 100%;
+    }
+
+    .hero-title {
+        font-family: 'Teko', sans-serif; 
+        font-size: 8vw; /* Responsive font size */
+        line-height: 0.9; text-align: center; text-transform: uppercase;
+        background: linear-gradient(to right, var(--orange), var(--white), var(--green));
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.2));
+        z-index: 2;
+    }
+
+    /* Rotating 3D Chakra */
+    .ashoka-3d {
+        width: 150px; height: 150px; margin: 40px 0;
+        border-radius: 50%; border: 4px solid var(--blue);
+        background: radial-gradient(circle, transparent 30%, rgba(0,0,128,0.2) 100%);
+        box-shadow: 0 0 50px var(--blue), inset 0 0 20px var(--blue);
+        animation: spin 8s linear infinite; position: relative;
+    }
+    .ashoka-3d::after {
+        content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+        background: repeating-conic-gradient(from 0deg, var(--blue) 0deg 2deg, transparent 2deg 15deg);
+        border-radius: 50%;
+    }
+
+    /* --- 5. TILT CARDS --- */
+    .cards-container {
+        display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;
+        perspective: 1000px;
+        width: 100%;
+    }
+    .tilt-card {
+        width: 300px; height: 400px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px); border-radius: 20px;
+        padding: 30px; display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        transform-style: preserve-3d; transform: translateZ(0);
+        transition: transform 0.1s; /* Smoother for non-tilt devices */
+    }
+    .tilt-card h3 { font-family: 'Teko'; font-size: 2rem; color: var(--orange); margin: 10px 0; transform: translateZ(20px); }
+    .tilt-card p { text-align: center; color: #aaa; transform: translateZ(20px); }
+    .card-icon { font-size: 3rem; color: var(--white); transform: translateZ(30px); }
+
+    /* --- 6. REALISTIC FLAG & POLE --- */
+    .flag-pole-area {
+        height: 450px; width: 300px; position: relative;
+        border-bottom: 5px solid #555; display: flex; justify-content: center;
+        max-width: 100%; /* Ensure it doesn't overflow mobile */
+    }
+    .pole {
+        width: 12px; height: 100%;
+        background: linear-gradient(90deg, #999, #fff, #999);
+        position: absolute; bottom: 0;
+        border-radius: 5px 5px 0 0;
+    }
+    
+    /* THE NEW BEAUTIFUL FLAG */
+    .flag {
+        width: 200px; height: 130px;
+        position: absolute; bottom: 20px; left: 51%;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+        transition: bottom 4s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+        
+        /* Realistic Cloth Gradient */
+        background: linear-gradient(180deg, 
+            var(--orange) 0%, var(--orange) 33%, 
+            var(--white) 33%, var(--white) 66%, 
+            var(--green) 66%, var(--green) 100%);
+        
+        /* Wave Animation */
+        animation: waveFlag 3s ease-in-out infinite alternate;
+        transform-origin: left;
+        z-index: 2; /* Ensure flag is above pole */
+    }
+
+    /* Cloth Ripple Effect Overlay */
+    .flag::before {
+        content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(90deg, 
+            rgba(255,255,255,0) 0%, 
+            rgba(255,255,255,0.2) 20%, 
+            rgba(0,0,0,0.1) 40%, 
+            rgba(255,255,255,0) 60%, 
+            rgba(0,0,0,0.1) 80%);
+        background-size: 200% 100%;
+        animation: ripple 2s linear infinite;
+    }
+
+    .chakra-center {
+        width: 35px; height: 35px;
+        border: 2px solid var(--blue); border-radius: 50%;
+        position: relative; z-index: 5;
+        background: white;
+        animation: spin 5s linear infinite;
+    }
+    .chakra-center::after {
+        content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+        background: repeating-conic-gradient(from 0deg, var(--blue) 0deg 15deg, transparent 15deg 30deg);
+        border-radius: 50%;
+    }
+
+    @keyframes waveFlag {
+        0% { transform: skewY(0deg); border-radius: 0 5px 5px 0; }
+        50% { transform: skewY(-2deg) translateY(-2px); border-radius: 0 10px 10px 0; }
+        100% { transform: skewY(2deg) translateY(2px); border-radius: 0 5px 5px 0; }
+    }
+    @keyframes ripple { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    .hoist-btn {
+        margin-top: 40px; padding: 15px 50px;
+        font-size: 1.5rem; font-family: 'Teko';
+        background: linear-gradient(45deg, var(--orange), var(--green));
+        border: none; color: white; border-radius: 50px;
+        box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        transition: 0.3s; z-index: 10;
+        width: auto; max-width: 90%; /* Responsive button */
+    }
+    .hoist-btn:hover { transform: scale(1.1); box-shadow: 0 0 40px var(--orange); }
+
+    /* --- 7. COPYRIGHT FOOTER --- */
+    footer {
+        margin-top: 50px; padding: 20px;
+        width: 100%; text-align: center;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid var(--border);
+    }
+    .copyright-text {
+        font-size: 1.1rem; color: #ccc; letter-spacing: 1px;
+    }
+    .social-link {
+        color: var(--orange); text-decoration: none;
+        font-weight: bold; position: relative;
+        transition: 0.3s; margin-left: 5px;
+        display: inline-block; /* Helps with link wrapping */
+    }
+    .social-link:hover {
+        color: var(--green); text-shadow: 0 0 10px var(--green);
+    }
+    .social-link i { margin-right: 5px; }
+
+    /* =========================================
+       RESPONSIVE MEDIA QUERIES (MOBILE FIXES)
+       ========================================= */
+    
+    @media (max-width: 768px) {
+        /* Adjust Hero Font Size for Mobile Portrait */
+        .hero-title {
+            font-size: 15vw; /* Bigger relative size on mobile */
+            margin-bottom: 20px;
+        }
+
+        /* Resize the Ashoka Chakra */
+        .ashoka-3d {
+            width: 100px; height: 100px;
+            margin: 20px 0;
+        }
+
+        /* Make Cards Full Width but with Limits */
+        .tilt-card {
+            width: 90%; 
+            height: auto; 
+            min-height: 350px;
+        }
+
+        /* Adjust Flag Area */
+        .flag-pole-area {
+            height: 380px; /* Slightly shorter on mobile */
+            width: 100%;
+        }
+        
+        .pole {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .flag {
+            /* Center the flag properly relative to pole on mobile */
+            left: 50%;
+            margin-left: 6px; /* Offset for pole width */
+            width: 160px; /* Slightly smaller flag */
+            height: 100px;
+        }
+
+        /* Footer Text Adjustments */
+        .copyright-text {
+            font-size: 0.9rem;
+        }
+        
+        /* Adjust Section Padding */
+        section {
+            padding: 40px 15px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hoist-btn {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+        }
+        
+        /* Reduce flag travel distance visually if needed */
+        .flag-pole-area {
+            height: 350px;
+        }
+    }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="particles-container" id="particles"></div>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-trail" id="trail1" style="background: var(--orange)"></div>
+    <div class="cursor-trail" id="trail2" style="background: var(--white)"></div>
+    <div class="cursor-trail" id="trail3" style="background: var(--green)"></div>
+
+    <section id="home">
+        <div style="border: 1px solid var(--orange); padding: 5px 15px; border-radius: 20px; color: var(--orange); margin-bottom:20px;" data-aos="fade-down">
+            26th January 2026
+        </div>
+        
+        <h1 class="hero-title" data-aos="zoom-in" data-aos-duration="1500">
+            Happy<br>Republic Day
+        </h1>
+        
+        <div class="ashoka-3d" data-aos="flip-left" data-aos-delay="500"></div>
+        
+        <p style="letter-spacing: 5px; text-transform: uppercase; margin-top: 20px;" data-aos="fade-up">
+            One Nation • One Emotion
+        </p>
+    </section>
+
+    <section id="heroes">
+        <h2 style="font-family:'Teko'; font-size:4rem; margin-bottom:50px;" data-aos="fade-right">
+            <span style="color:var(--orange)">PRIDE</span> OF INDIA
+        </h2>
+        
+        <div class="cards-container">
+            <div class="tilt-card" data-tilt>
+                <i class="fas fa-rocket card-icon"></i>
+                <h3>Innovation</h3>
+                <p>From UPI to Chandrayaan, we are leading the digital frontier.</p>
+            </div>
+            
+            <div class="tilt-card" data-tilt>
+                <i class="fas fa-users card-icon" style="color:var(--green)"></i>
+                <h3>Unity</h3>
+                <p>1.4 Billion hearts beating with the same rhythm of patriotism.</p>
+            </div>
+
+            <div class="tilt-card" data-tilt>
+                <i class="fas fa-shield-alt card-icon" style="color:var(--blue)"></i>
+                <h3>Defence</h3>
+                <p>Saluting the brave guardians who protect our borders day & night.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="hoist">
+        <h2 style="font-family:'Teko'; font-size:4rem; margin-bottom:30px;" data-aos="fade-up">
+            JAI HIND <span style="color:var(--green)"> – SALUTE TO THE TRICOLOUR</span>
+        </h2>
+        
+        <div class="flag-pole-area">
+            <div class="pole"></div>
+            <div class="flag" id="flag">
+                <div class="chakra-center"></div>
+            </div>
+        </div>
+
+        <button class="hoist-btn" onclick="hoistTheFlag()">CLICK TO HOIST 🇮🇳</button>
+    </section>
+
+    <footer>
+        <p class="copyright-text">
+            © 2026 Republic Day Project | Designed by 
+            <a href="https://www.instagram.com/shobhit_asthana_/" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i> @shobhit_asthana_
+            </a>
+        </p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        // 1. Initialize Scroll Animation
+        AOS.init({ duration: 1000, offset: 100, once: false });
+
+        // 2. Initialize 3D Tilt Effect
+        VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
+            max: 25, speed: 400, glare: true, "max-glare": 0.5
+        });
+
+        // 3. Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        const trails = [document.getElementById('trail1'), document.getElementById('trail2'), document.getElementById('trail3')];
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+            setTimeout(() => { trails[0].style.left = e.clientX + 'px'; trails[0].style.top = e.clientY + 'px'; }, 50);
+            setTimeout(() => { trails[1].style.left = e.clientX + 'px'; trails[1].style.top = e.clientY + 'px'; }, 100);
+            setTimeout(() => { trails[2].style.left = e.clientX + 'px'; trails[2].style.top = e.clientY + 'px'; }, 150);
+        });
+
+        // 4. Generate Background Particles
+        const particlesContainer = document.getElementById('particles');
+        const colors = ['#FF9933', '#FFFFFF', '#138808'];
+        for(let i=0; i<20; i++) {
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            p.style.background = colors[Math.floor(Math.random() * 3)];
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.width = p.style.height = Math.random() * 10 + 5 + 'px';
+            p.style.animationDuration = Math.random() * 5 + 5 + 's';
+            p.style.animationDelay = Math.random() * 5 + 's';
+            particlesContainer.appendChild(p);
+        }
+
+        // 5. Flag Hoisting Logic
+        function hoistTheFlag() {
+            const flag = document.getElementById('flag');
+            const btn = document.querySelector('.hoist-btn');
+
+            // Move Flag Up
+            flag.style.bottom = "320px";
+            btn.innerHTML = "SALUTING...";
+            btn.style.background = "#333";
+            btn.style.pointerEvents = "none";
+
+            // Trigger Confetti after delay
+            setTimeout(() => {
+                triggerConfetti();
+                btn.innerHTML = "JAI HIND! 🇮🇳";
+                btn.style.background = "linear-gradient(45deg, var(--orange), var(--green))";
+                btn.style.pointerEvents = "all";
+            }, 4000);
+        }
+
+        // 6. Confetti Explosion
+        function triggerConfetti() {
+            var duration = 5 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) { return clearInterval(interval); }
+                var particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }, colors: ['#FF9933', '#FFF'] }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }, colors: ['#138808', '#FFF'] }));
+            }, 250);
+        }
+    </script>
+</body>
+</html>

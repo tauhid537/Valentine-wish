@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Rose Day Special - For You</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Quicksand:wght@300;500&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            /* Premium Romantic Gradient */
+            background: radial-gradient(circle at center, #3a0d18 0%, #0f0205 100%);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        /* --- BACKGROUND EFFECTS --- */
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+            opacity: 0.3;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .heart-particle {
+            position: absolute;
+            color: rgba(255, 50, 90, 0.6);
+            animation: floatUp linear infinite;
+            z-index: 0;
+            text-shadow: 0 0 5px rgba(255, 0, 80, 0.8);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) scale(0.5) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- LAYOUT WRAPPER --- */
+        .main-wrapper {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+
+        /* --- THE ROSE (CSS ART) --- */
+        /* We use a transform scale to make it responsive on mobile */
+        .rose-wrapper {
+            position: relative;
+            width: 250px;
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Animation to float the whole flower */
+            animation: floating 4s ease-in-out infinite;
+            transition: transform 0.5s ease;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Container for the specific CSS drawing coordinates */
+        .rose-art {
+            position: relative;
+            width: 200px;
+            height: 300px;
+            transform-origin: center center;
+        }
+
+        /* Petal Gradients - Richer Velvet Colors */
+        .petals > div {
+            position: absolute;
+            background: #d52d58;
+            background: linear-gradient(135deg, #ff0844 0%, #870026 100%);
+            width: 45px;
+            height: 80px;
+            top: 55px;
+            transition: all 0.5s ease-out;
+            box-shadow: 2px 2px 15px rgba(0,0,0,0.6);
+        }
+
+        .petals > div:nth-child(1) {
+            border-radius: 15px;
+            box-shadow: 0px 0px 40px #ff0844; /* Glowing Core */
+            left: 80px;
+            top: 60px;
+            background: #d52d58;
+            z-index: 10;
+        }
+
+        .petals > div:nth-child(2), .petals > div:nth-child(4), .petals > div:nth-child(6) {
+            left: 60px;
+            border-radius: 0px 30px 0px 30px;
+            transform-origin: bottom right;
+        }
+
+        .petals > div:nth-child(3), .petals > div:nth-child(5), .petals > div:nth-child(7) {
+            left: 100px;
+            border-radius: 30px 0px 30px 0px;
+            transform-origin: bottom left;
+        }
+
+        /* Blooming Animations */
+        .petals > div:nth-child(2) { z-index: 5; background: linear-gradient(to right, #9e0e30, #ff3864); top: 75px; height: 70px; animation: bloom2 3s ease-in-out forwards; }
+        .petals > div:nth-child(3) { z-index: 4; background: linear-gradient(to left, #9e0e30, #ff3864); top: 75px; height: 70px; animation: bloom3 3s ease-in-out forwards; }
+        .petals > div:nth-child(4) { z-index: 3; background: linear-gradient(to right, #b81b43, #ff5e85); top: 70px; height: 75px; animation: bloom4 3s ease-in-out forwards; }
+        .petals > div:nth-child(5) { z-index: 2; background: linear-gradient(to left, #b81b43, #ff5e85); top: 70px; height: 75px; animation: bloom5 3s ease-in-out forwards; }
+        .petals > div:nth-child(6) { z-index: 1; background: linear-gradient(to right, #c9204b, #ff8ba7); top: 65px; height: 70px; animation: bloom6 3s ease-in-out forwards; }
+        .petals > div:nth-child(7) { z-index: 0; background: linear-gradient(to left, #c9204b, #ff8ba7); top: 65px; height: 70px; animation: bloom7 3s ease-in-out forwards; }
+
+        /* Stem and Leaves */
+        .leaves > div:nth-last-child(1) {
+            position: absolute; width: 55px; height: 30px; background: #338f37; top: 120px; left: 75px; border-radius: 100px;
+        }
+        .leaves > div:nth-child(1) {
+            position: absolute; width: 6px; height: 230px; 
+            background: linear-gradient(to right, #054c05, #1a9d1a); /* Realistic stem */
+            top: 95px; left: 100px; border-radius: 0 0 100px 100px;
+        }
+        .leaves > div:nth-child(2) {
+            position: absolute; width: 30px; height: 50px; border-radius: 5px 40px 20px 40px; background: #0f6e0f; 
+            transform-origin: bottom; transform: rotate(-30deg); top: 180px; left: 80px; box-shadow: inset 5px 5px #1ebc1e;
+        }
+        .leaves > div:nth-child(3) {
+            position: absolute; width: 30px; height: 50px; border-radius: 40px 5px 40px 20px; background: #0f6e0f;
+            transform-origin: bottom; transform: rotate(30deg); top: 150px; left: 95px; box-shadow: inset -5px 5px #1ebc1e;
+        }
+
+        /* Thorns */
+        .thorns > div { position: absolute; width: 0; height: 0; top: 140px; }
+        .thorns > div:nth-child(odd) { border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 5px solid #054c05; left: 105px; }
+        .thorns > div:nth-child(even) { border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-right: 5px solid #054c05; left: 95px; }
+        .thorns > div:nth-child(1) { top: 200px; }
+        .thorns > div:nth-child(2) { top: 170px; }
+        .thorns > div:nth-child(4) { top: 230px; }
+
+        @keyframes bloom2 { 50% { transform: rotate(-90deg); top: 200px; left: 100px; } 100% { transform: rotate(-60deg); top: 252px; left: 50px; background: #71122a; box-shadow: 0px 10px 10px rgba(0,0,0,0.5); } }
+        @keyframes bloom3 { 100% { transform: rotate(45deg); } }
+        @keyframes bloom4 { 100% { transform: rotate(-20deg); } }
+        @keyframes bloom5 { 100% { transform: rotate(20deg); } }
+        @keyframes bloom6 { 100% { transform: rotate(-5deg); } }
+        @keyframes bloom7 { 100% { transform: rotate(5deg); } }
+
+        /* --- GLASS CARD --- */
+        .glass-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05); /* Very transparent */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 2s ease 1s forwards; /* Delayed entrance */
+            opacity: 0;
+            transform: translateY(30px);
+            margin-top: -30px; /* Slight overlap for cohesion */
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .text h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive Font Size */
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ff9a9e, #fecfef, #ff9a9e);
+            background-size: 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .text p {
+            font-family: 'Quicksand', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #ffdde1;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* --- BUTTON --- */
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover {
+            background: #d52d58;
+            box-shadow: 0 0 20px #d52d58;
+            border-color: #d52d58;
+            transform: translateY(-2px);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media screen and (max-width: 600px) {
+            /* Shrink the rose art so it fits on small screens */
+            .rose-art {
+                transform: scale(0.65); /* Scale down to 65% */
+            }
+            
+            .rose-wrapper {
+                height: 280px; /* Reduce container height */
+                margin-top: -20px;
+            }
+
+            .glass-card {
+                width: 90%;
+                padding: 1.5rem;
+                margin-top: -50px; /* Pull text closer to rose */
+            }
+
+            .text h1 {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-overlay"></div>
+    <div id="heartBg"></div>
+
+    <div class="main-wrapper">
+        
+        <div class="rose-wrapper">
+            <div class="rose-art">
+                <div class="thorns">
+                    <div></div><div></div><div></div><div></div>
+                </div>
+                <div class="leaves">
+                    <div></div><div></div><div></div><div></div>
+                </div>
+                <div class="petals">
+                    <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="text">
+                <h1>Happy Rose Day</h1>
+                <p>
+                    A single rose can be my garden,<br>
+                    but a single friend like you is my world.
+                </p>
+                <a href="new.html" class="btn">Tap for Magic ✨</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function createHearts() {
+            const container = document.getElementById('heartBg');
+            const heartCount = 35; // Number of hearts
+
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = Math.random() > 0.5 ? '❤' : '🌹'; // Mix of hearts and roses
+                heart.classList.add('heart-particle');
+                
+                // Random positioning
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 5 + 's'; // Slow float
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                
+                container.appendChild(heart);
+            }
+        }
+
+        // Initialize animation
+        createHearts();
+    </script>
+</body>
+</html>
